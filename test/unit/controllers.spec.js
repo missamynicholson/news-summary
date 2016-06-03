@@ -7,7 +7,8 @@ describe("NewsSummaryController", function() {
     controller = $controller("NewsSummaryController");
   }));
 
-  it("makes exposes a greeting of 'Hello, world'", function() {
-    expect(controller.greeting).toEqual("Hello, world");
+  it("has two articles upon initialisation", function() {
+    expect(controller.articles).toEqual(["First article", "Second article"]);
   });
+
 });
