@@ -1,14 +1,17 @@
 describe("NewsSummaryController", function() {
-  var controller;
+  var controller, factory;
 
   beforeEach(module("newsSummaryApp"));
 
-  beforeEach(inject(function($controller) {
+  beforeEach(inject(function($controller, _ArticleFactory_) {
     controller = $controller("NewsSummaryController");
+    factory = _ArticleFactory_;
   }));
 
   it("has two articles upon initialisation", function() {
-    expect(controller.articles).toEqual(["First article", "Second article"]);
+    article1 = new factory("First article");
+    article2 = new factory("Second article");
+    expect(controller.articles).toEqual([article1, article2]);
   });
 
 });

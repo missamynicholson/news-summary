@@ -1,5 +1,6 @@
-newsSummaryApp.controller("NewsSummaryController", function() {
+newsSummaryApp.controller("NewsSummaryController", ["ArticleFactory", function(ArticleFactory) {
     var self = this;
 
-    self.articles = ["First article", "Second article"];
-});
+    self.articles = [new ArticleFactory("First article"), new ArticleFactory("Second article")];
+
+}]);
