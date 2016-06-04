@@ -25,5 +25,8 @@
     "karma-cli": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "protractor": "^3.3.0"
+  },
+  "devDependencies": {
+    "protractor-http-mock": "^0.8.0"
   }
 }

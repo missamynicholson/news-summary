@@ -1,6 +1,8 @@
-newsSummaryApp.controller("NewsSummaryController", ["ArticleFactory", function(ArticleFactory) {
+newsSummaryApp.controller("NewsSummaryController", ["ArticleFactory", "ArticleService", function(ArticleFactory, ArticleService) {
     var self = this;
 
-    self.articles = [new ArticleFactory("First article"), new ArticleFactory("Second article")];
+    ArticleService.getAll().then(function(response) {
+      self.articles = response;
+    });
 
 }]);
