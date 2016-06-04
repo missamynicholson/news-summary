@@ -4,12 +4,12 @@ describe("app", function() {
   beforeEach(function(){
     mock([{
       request: {
-        path: 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics',
+        path: 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics?show-fields=all',
         method: 'get'
       },
       response: {
-        data: {response:{results:[{webTitle: "First article"}, {webTitle: "Second article"}]}}
-      }
+        data: {response:{results:[{webTitle: "First article", fields: {thumbnail: "pic1Url.jpg"}}, {webTitle: "Second article", fields: {thumbnail: "pic1Url.jpg"}}]}}
+    }
     }]);
   });
 
@@ -20,7 +20,7 @@ describe("app", function() {
   it("should mock the http request", function() {
     browser.get('/');
     expect(mock.requestsMade()).toEqual([
-       { url : 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics', method : 'GET' }
+       { url : 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics?show-fields=all', method : 'GET' }
     ]);
   });
 
@@ -39,5 +39,14 @@ describe("app", function() {
     expect($$('article').get(1).$('h3').getText()).toContain("Second article");
   });
 
+  it("should display a photo with first article", function() {
+    browser.get('/');
+    expect($$('article').first().$('img').getAttribute('src')).toEqual("pic1Url.jpg");
+  });
+
+  it("should display a photo with second article", function() {
+    browser.get('/');
+    expect($$('article').get(1).$('img').getAttribute('src')).toEqual("pic2Url.jpg");
+  });
 
 });

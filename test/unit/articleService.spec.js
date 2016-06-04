@@ -9,11 +9,11 @@ describe("ArticleService", function() {
   }));
 
   it("returns an array of articles", function() {
-    url = "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics";
-    mockedResponse = {response:{results:[{webTitle: "First article"}, {webTitle: "Second article"}]}};
+    url = "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics?show-fields=all";
+    mockedResponse = {response:{results:[{webTitle: "First article", fields: {thumbnail: "pic1Url.jpg"}}, {webTitle: "Second article", fields: {thumbnail: "pic2Url.jpg"}}]}};
     httpMock.expect("GET", url).respond(mockedResponse);
 
-    articles = [new articleFactory("First article"), new articleFactory("Second article")];
+    articles = [new articleFactory("First article", "pic1Url.jpg"), new articleFactory("Second article", "pic2Url.jpg")];
     service.getAll().then(function(response) {
       expect(response).toEqual(articles);
     });
