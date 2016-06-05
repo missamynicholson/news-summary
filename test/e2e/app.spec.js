@@ -1,8 +1,11 @@
 describe("app", function() {
   var mock = require('protractor-http-mock');
-  var article1Result = {webTitle: "First article", webUrl: "http://article1Url", fields: {thumbnail: "pic1Url.jpg"}};
-  var article2Result = {webTitle: "Second article", webUrl: "http://article2Url", fields: {thumbnail: "pic2Url.jpg"}};
-
+  var article1Result = {webTitle: "First article",
+                    webUrl: "http://article1weburl/",
+                    fields: {thumbnail: "pic1Url.jpg"}};
+  var article2Result = {webTitle: "Second article",
+                    webUrl: "http://article2weburl/",
+                    fields: {thumbnail: "pic2Url.jpg"}};
   beforeEach(function(){
     mock([{
       request: {
@@ -58,6 +61,11 @@ describe("app", function() {
     $$('article').first().$('.summary').click();
     summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
     expect(element(by.id("summaryView")).getText()).toEqual(summary);
+  });
+
+  it("should go to Guardian site when click 'Read full article'", function() {
+    browser.get('/');
+    expect($$('article').first().$('a').getAttribute('href')).toEqual("http://article1weburl/");
   });
 
 });

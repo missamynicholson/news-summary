@@ -4,7 +4,7 @@ describe("ArticleFactory", function() {
   beforeEach(module("newsSummaryApp"));
 
   beforeEach(inject(function(ArticleFactory) {
-    article = new ArticleFactory("First Article", "pic1Url", "web1Url");
+    article = new ArticleFactory("First Article", "pic1Url", "http://article1weburl/");
   }));
 
   it("returns an article with title", function() {
@@ -16,7 +16,7 @@ describe("ArticleFactory", function() {
   });
 
   it("returns an article with a webUrl", function() {
-    expect(article.webUrl).toEqual("web1Url");
+    expect(article.webUrl).toEqual("http://article1weburl/");
   });
 
 });

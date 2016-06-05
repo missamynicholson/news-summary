@@ -17,7 +17,7 @@
       <article ng-repeat="article in controller.articles">
         <h3>{{ article.title }}</h3>
         <img ng-src="{{ article.photo }}"/>
-        print {{ article.webUrl}}
+        <a href="{{ article.webUrl}}">Read full article</a>
         <button class="summary" ng-click="controller.selectArticle(article.webUrl)">Read more</button>
       </article>
       <div id="summaryView">{{ controller.articleSummary }}</div>
