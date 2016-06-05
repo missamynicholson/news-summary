@@ -1,27 +1,31 @@
 describe("app", function() {
   var mock = require('protractor-http-mock');
+  var article1Result = {webTitle: "First article", webUrl: "http://article1Url", fields: {thumbnail: "pic1Url.jpg"}};
+  var article2Result = {webTitle: "Second article", webUrl: "http://article2Url", fields: {thumbnail: "pic2Url.jpg"}};
 
   beforeEach(function(){
     mock([{
       request: {
-        path: 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics?show-fields=all',
-        method: 'get'
+        path: 'http://news-summary-api.herokuapp.com/guardian',
+        method: 'GET'
       },
       response: {
-        data: {response:{results:[{webTitle: "First article", fields: {thumbnail: "pic1Url.jpg"}}, {webTitle: "Second article", fields: {thumbnail: "pic1Url.jpg"}}]}}
-    }
+        data: {response:{results:[article1Result, article2Result]}}
+      }
+    }, {
+      request: {
+        path: 'http://news-summary-api.herokuapp.com/aylien',
+        method: 'GET'
+      },
+      response: {
+        data: {sentences:["First sentence.", "Second sentence.", "Third sentence.", "Fourth sentence.", "Fifth sentence."]}
+      }
     }]);
+
   });
 
   afterEach(function(){
     mock.teardown();
-  });
-
-  it("should mock the http request", function() {
-    browser.get('/');
-    expect(mock.requestsMade()).toEqual([
-       { url : 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics?show-fields=all', method : 'GET' }
-    ]);
   });
 
   it("should get home page title", function() {
@@ -41,12 +45,19 @@ describe("app", function() {
 
   it("should display a photo with first article", function() {
     browser.get('/');
-    expect($$('article').first().$('img').getAttribute('src')).toEqual("pic1Url.jpg");
+    expect($$('article').first().$('img').getAttribute('src')).toContain("pic1Url.jpg");
   });
 
   it("should display a photo with second article", function() {
     browser.get('/');
-    expect($$('article').get(1).$('img').getAttribute('src')).toEqual("pic2Url.jpg");
+    expect($$('article').get(1).$('img').getAttribute('src')).toContain("pic2Url.jpg");
+  });
+
+  it("should show a summary of first article when click 'Read more'", function() {
+    browser.get('/');
+    $$('article').first().$('.summary').click();
+    summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
+    expect(element(by.id("summaryView")).getText()).toEqual(summary);
   });
 
 });
