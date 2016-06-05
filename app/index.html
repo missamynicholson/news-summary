@@ -9,6 +9,7 @@
     <script src="js/controllers.js"></script>
     <script src="js/services/articleFactory.js"></script>
     <script src="js/services/articleService.js"></script>
+    <script src="js/services/summaryService.js"></script>
     <title>News Summary</title>
   </head>
 
@@ -18,9 +19,18 @@
         <h3>{{ article.title }}</h3>
         <img ng-src="{{ article.photo }}"/>
         <a href="{{ article.webUrl}}">Read full article</a>
-        <button class="summary" ng-click="controller.selectArticle(article.webUrl)">Read more</button>
+        <button class="summary" ng-click="controller.getSummary(article)">Read more</button>
+        <p>{{ article.articleSummary }}</p>
+
+        <!-- <a href="" ng-click="showme=true">Show</a>
+          <button ng-click="showme=false">Hide</button>
+
+          <div class="wrapper">
+            <p ng-hide="showme">It will appear here!</p>
+            <h2 ng-show="showme">This is mah content, yo!</h2>
+          </div> -->
+
       </article>
-      <div id="summaryView">{{ controller.articleSummary }}</div>
     </div>
   </body>
 </html>

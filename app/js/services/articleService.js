@@ -13,13 +13,4 @@ newsSummaryApp.service("ArticleService", ["$http", "ArticleFactory", function($h
     return articles;
   }
 
-  this.getSummary = function(webUrl) {
-    aylienUrl = "http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=";
-    return $http.get(aylienUrl + webUrl).then(_summarize);
-  };
-
-  function _summarize(response) {
-    return response.data.sentences.join(" ");
-  }
-
 }]);

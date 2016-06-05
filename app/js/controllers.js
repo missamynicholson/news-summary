@@ -1,13 +1,13 @@
-newsSummaryApp.controller("NewsSummaryController", ["ArticleFactory", "ArticleService", function(ArticleFactory, ArticleService) {
+newsSummaryApp.controller("NewsSummaryController", ["ArticleService", "SummaryService", function(ArticleService, SummaryService) {
   var self = this;
 
     ArticleService.getAll().then(function(response) {
       self.articles = response;
      });
 
-    this.selectArticle = function(webUrl) {
-      ArticleService.getSummary(webUrl).then(function(response) {
-        self.articleSummary = response;
+    this.getSummary = function(article) {
+      SummaryService.getSummary(article).then(function(response) {
+        article.articleSummary = response;
       });
     };
 

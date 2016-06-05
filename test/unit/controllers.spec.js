@@ -34,9 +34,9 @@ describe("NewsSummaryController", function() {
 
   it("returns a summary", function() {
     summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
-    controller.selectArticle(article1.webUrl);
+    controller.getSummary(article1);
     httpMock.flush();
-    expect(controller.articleSummary).toEqual(summary);
+    expect(article1.articleSummary).toEqual(summary);
   });
 
 });

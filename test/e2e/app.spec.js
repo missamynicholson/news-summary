@@ -60,7 +60,7 @@ describe("app", function() {
     browser.get('/');
     $$('article').first().$('.summary').click();
     summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
-    expect(element(by.id("summaryView")).getText()).toEqual(summary);
+    expect($$('article').first().$('p').getText()).toEqual(summary);
   });
 
   it("should go to Guardian site when click 'Read full article'", function() {

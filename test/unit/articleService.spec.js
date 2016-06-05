@@ -19,9 +19,6 @@ describe("ArticleService", function() {
     httpMock.expect("GET", guardianUrl).respond(mockedResponseFromGuardian);
 
     article1 = new articleFactory("First article", "pic1Url.jpg", "http://article1weburl/");
-    aylienUrl = "http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=";
-    mockedResponseFromAylien = {sentences:["First sentence.", "Second sentence.", "Third sentence.", "Fourth sentence.", "Fifth sentence."]};
-    httpMock.when("GET", aylienUrl + article1.webUrl).respond(mockedResponseFromAylien);
   }));
 
   it("returns an array of articles", function() {
@@ -33,12 +30,4 @@ describe("ArticleService", function() {
     });
   });
 
-
-  it("returns a summary", function() {
-    summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
-    service.getSummary(article1.webUrl).then(function(response) {
-      httpMock.flush();
-      expect(response).toEqual(summary);
-    });
-  });
 });
