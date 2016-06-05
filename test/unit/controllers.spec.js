@@ -1,5 +1,5 @@
 describe("NewsSummaryController", function() {
-  var controller, articleFactory, httpMock, article1;
+  var controller, articleFactory, httpMock, article1, summary;
 
   beforeEach(module("newsSummaryApp"));
 
@@ -7,6 +7,8 @@ describe("NewsSummaryController", function() {
     controller = $controller("NewsSummaryController");
     articleFactory = ArticleFactory;
     httpMock = $httpBackend;
+
+    summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
 
     guardianUrl = "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/politics?show-fields=all";
     article1Response = {webTitle: "First article",
@@ -33,14 +35,12 @@ describe("NewsSummaryController", function() {
 
 
   it("returns a summary if undefined", function() {
-    summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
     controller.getSummary(article1);
     httpMock.flush();
     expect(article1.articleSummary).toEqual(summary);
   });
 
   it("returns the saved summary if previously defined, does not call API", function() {
-    summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
     controller.getSummary(article1);
     httpMock.flush();
     controller.getSummary(article1);

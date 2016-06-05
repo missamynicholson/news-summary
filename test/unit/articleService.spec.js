@@ -1,5 +1,5 @@
 describe("ArticleService", function() {
-  var service, articleFactory, httpMock, article1;
+  var service, articleFactory, httpMock;
 
   beforeEach(module("newsSummaryApp"));
 
@@ -17,11 +17,10 @@ describe("ArticleService", function() {
                       fields: {thumbnail: "pic2Url.jpg"}};
     mockedResponseFromGuardian = {response:{results:[article1Result, article2Result]}};
     httpMock.expect("GET", guardianUrl).respond(mockedResponseFromGuardian);
-
-    article1 = new articleFactory("First article", "pic1Url.jpg", "http://article1weburl/");
   }));
 
   it("returns an array of articles", function() {
+    article1 = new articleFactory("First article", "pic1Url.jpg", "http://article1weburl/");
     article2 = new articleFactory("Second article", "pic2Url.jpg", "http://article2weburl/");
     articles = [article1, article2];
     service.getAll().then(function(response) {

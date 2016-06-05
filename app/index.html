@@ -13,11 +13,12 @@
     <title>News Summary</title>
   </head>
 
-  <body>
+  <body style="text-align:center">
     <div ng-controller="NewsSummaryController as controller">
       <article ng-repeat="article in controller.articles">
         <h3>{{ article.title }}</h3>
         <img ng-src="{{ article.photo }}"/>
+        <br>
         <button class="summary" ng-hide="showme" ng-click="controller.getSummary(article); showme=true">Read more</button>
         <div ng-show="showme" class="wrapper">
           <p>{{ article.articleSummary }}</p>

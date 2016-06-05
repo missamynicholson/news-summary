@@ -36,12 +36,12 @@ describe("app", function() {
     expect(browser.getTitle()).toEqual("News Summary");
   });
 
-  it("should display first article", function() {
+  it("should display first article title", function() {
     browser.get('/');
     expect($$('article').first().$('h3').getText()).toContain("First article");
   });
 
-  it("should display second article", function() {
+  it("should display second article title", function() {
     browser.get('/');
     expect($$('article').get(1).$('h3').getText()).toContain("Second article");
   });
