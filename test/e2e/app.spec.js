@@ -60,12 +60,21 @@ describe("app", function() {
     browser.get('/');
     $$('article').first().$('.summary').click();
     summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
-    expect($$('article').first().$('p').getText()).toEqual(summary);
+    expect($$('article').first().$('.wrapper').isDisplayed()).toBeTruthy();
+    expect($$('article').first().$('div p').getText()).toEqual(summary);
+  });
+
+  it("should show hide summary of first article when click 'Read less'", function() {
+    browser.get('/');
+    $$('article').first().$('.summary').click();
+    $$('article').first().$('.hideSummary').click();
+    expect($$('article').first().$('.wrapper').isDisplayed()).toBeFalsy();
   });
 
   it("should go to Guardian site when click 'Read full article'", function() {
     browser.get('/');
-    expect($$('article').first().$('a').getAttribute('href')).toEqual("http://article1weburl/");
+    $$('article').first().$('.summary').click();
+    expect($$('article').first().$('div a').getAttribute('href')).toEqual("http://article1weburl/");
   });
 
 });

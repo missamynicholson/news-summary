@@ -6,9 +6,11 @@ newsSummaryApp.controller("NewsSummaryController", ["ArticleService", "SummarySe
      });
 
     this.getSummary = function(article) {
-      SummaryService.getSummary(article).then(function(response) {
-        article.articleSummary = response;
-      });
+      if (typeof article.articleSummary === "undefined") {
+        SummaryService.getSummary(article).then(function(response) {
+          article.articleSummary = response;
+        });
+      }
     };
 
 }]);

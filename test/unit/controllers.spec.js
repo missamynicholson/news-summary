@@ -32,10 +32,18 @@ describe("NewsSummaryController", function() {
   });
 
 
-  it("returns a summary", function() {
+  it("returns a summary if undefined", function() {
     summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
     controller.getSummary(article1);
     httpMock.flush();
+    expect(article1.articleSummary).toEqual(summary);
+  });
+
+  it("returns the saved summary if previously defined, does not call API", function() {
+    summary = "First sentence. Second sentence. Third sentence. Fourth sentence. Fifth sentence.";
+    controller.getSummary(article1);
+    httpMock.flush();
+    controller.getSummary(article1);
     expect(article1.articleSummary).toEqual(summary);
   });
 

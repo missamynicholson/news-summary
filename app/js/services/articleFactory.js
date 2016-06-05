@@ -4,7 +4,6 @@ newsSummaryApp.factory("ArticleFactory", function() {
     this.title = title;
     this.photo = picUrl;
     this.webUrl = summaryUrl;
-    this.articleSummary = "";
   };
 
   return article;

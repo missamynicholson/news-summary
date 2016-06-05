@@ -18,18 +18,12 @@
       <article ng-repeat="article in controller.articles">
         <h3>{{ article.title }}</h3>
         <img ng-src="{{ article.photo }}"/>
-        <a href="{{ article.webUrl}}">Read full article</a>
-        <button class="summary" ng-click="controller.getSummary(article)">Read more</button>
-        <p>{{ article.articleSummary }}</p>
-
-        <!-- <a href="" ng-click="showme=true">Show</a>
-          <button ng-click="showme=false">Hide</button>
-
-          <div class="wrapper">
-            <p ng-hide="showme">It will appear here!</p>
-            <h2 ng-show="showme">This is mah content, yo!</h2>
-          </div> -->
-
+        <button class="summary" ng-hide="showme" ng-click="controller.getSummary(article); showme=true">Read more</button>
+        <div ng-show="showme" class="wrapper">
+          <p>{{ article.articleSummary }}</p>
+          <button class="hideSummary" ng-click="showme=false">Read less</button>
+          <a href="{{ article.webUrl}}">Read full article</a>
+        </div>
       </article>
     </div>
   </body>
